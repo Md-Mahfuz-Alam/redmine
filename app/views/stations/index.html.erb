@@ -1,0 +1,46 @@
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Add New Fault & Solutions For Stations</h1>
+
+  <%= link_to "Add New Station", new_station_path, class: "btn btn-custom mb-3" %>
+  <%= link_to "Add New Fault", new_fault_path, class: "btn btn-custom mb-3" %>
+  <%= link_to "Add New Solution", new_solution_path, class: "btn btn-custom mb-3" %>
+
+  <div class="table-responsive">
+    <table class="table table-bordered text-center">
+      <thead class="thead-light">
+        <tr>
+          <th>Station</th>
+          <th>Faults</th>
+          <th>Solutions</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+<tbody>
+  <% @stations.each do |station| %>
+    <tr>
+      <td><%= station.name %></td>
+      <td>
+        <% station.faults.each do |fault| %>
+          <%= fault.name %><br>
+        <% end %>
+      </td>
+      <td>
+        <% station.faults.each do |fault| %>
+          <% fault.solutions.each do |solution| %>
+            <%= solution.name %><br>
+          <% end %>
+        <% end %>
+      </td>
+      <td>
+        <div class="d-flex justify-content-center">
+          <%= link_to '<i class="fa fa-trash"></i>'.html_safe, station_path(station), method: :delete, class: "btn btn-link text-danger", data: { confirm: "Are you sure?" }, remote: true %>
+        </div>
+      </td>
+    </tr>
+  <% end %>
+</tbody>
+
+
+    </table>
+  </div>
+</div>

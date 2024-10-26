@@ -4,6 +4,11 @@
  * This code is released under the GNU General Public License.
  */
 
+
+//= require jquery
+//= require rails-ujs
+
+
 function sanitizeHTML(string) {
   var temp = document.createElement('span');
   temp.textContent = string;

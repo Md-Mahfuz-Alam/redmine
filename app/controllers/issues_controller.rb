@@ -92,6 +92,16 @@ class IssuesController < ApplicationController
     render_404
   end
 
+  def faults_for_station
+    faults = Fault.where(station_id: params[:station_id])
+    render json: faults
+  end
+
+  def solutions_for_fault
+    solutions = Solution.where(fault_id: params[:fault_id])
+    render json: solutions
+  end
+
   def show
     if !api_request? || include_in_api_response?('journals')
       @journals = @issue.visible_journals_with_index

@@ -216,6 +216,10 @@ Rails.application.routes.draw do
   end
 
   resources :issues do
+    collection do
+      get 'faults_for_station'
+      get 'solutions_for_fault'
+    end
     member do
       # Used when updating the form of an existing issue
       patch 'edit', :to => 'issues#edit'
@@ -411,6 +415,15 @@ Rails.application.routes.draw do
 
   get 'help/wiki_syntax/(:type)', :controller => 'help', :action => 'show_wiki_syntax', :constraints => { :type => /detailed/ }, :as => 'help_wiki_syntax'
   get 'help/code_highlighting', :controller => 'help', :action => 'show_code_highlighting',  :as => 'help_code_highlighting'
+  resources :stations do
+    member do
+      get :faults
+    end
+  end
+  resources :faults do
+    resources :solutions, only: [:index]
+  end
+  resources :solutions
 
   Redmine::Plugin.directory.glob("*/config/routes.rb").sort.each do |plugin_routes_path|
     instance_eval(plugin_routes_path.read, plugin_routes_path.to_s)

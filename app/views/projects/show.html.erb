@@ -21,6 +21,10 @@
   <% end %>
 </div>
 
+
+<%= link_to 'Manage Faults & Solutions for Project', stations_path(project_id: @project.id)  %>
+
+
 <h2><%=l(:label_overview)%></h2>
 
 <% unless @project.active? %>

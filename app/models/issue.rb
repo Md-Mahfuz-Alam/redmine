@@ -25,7 +25,9 @@ class Issue < ApplicationRecord
   before_validation :clear_disabled_fields
   before_save :set_parent_id
   include Redmine::NestedSet::IssueNestedSet
-
+  belongs_to :station, optional: true
+  belongs_to :fault, optional: true
+  belongs_to :solution, optional: true
   belongs_to :project
   belongs_to :tracker
   belongs_to :status, :class_name => 'IssueStatus'
